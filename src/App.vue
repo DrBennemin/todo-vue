@@ -3,6 +3,7 @@
     <body>
       <Header />
       <Input />
+      <ListItem :todos="todos" />
     </body>
   </div>
 </template>
@@ -10,30 +11,19 @@
 <script>
 import Header from "./components/Header";
 import Input from "./components/Input";
+import ListItem from "./components/ListItem";
 
 export default {
   name: "App",
   components: {
     Header,
     Input,
+    ListItem,
   },
   data: function() {
     return {
-      newTodoText: [],
-      todos: [
-        {
-          id: 1,
-          title: "Do the dishes",
-        },
-        {
-          id: 2,
-          title: "Take out the trash",
-        },
-        {
-          id: 3,
-          title: "Mow the lawn",
-        },
-      ],
+      newTodo: [],
+      todos: ["Do the dishes", "Take out the trash", "Mow the lawn"],
     };
   },
 };
@@ -109,7 +99,7 @@ form button:hover {
 
 .todo li {
   flex: 1;
-  width: 45vw;
+  width: 90vw;
 }
 
 .delete-btn,

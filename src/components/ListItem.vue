@@ -1,16 +1,16 @@
-<template> </template>
+<template>
+  <div class="todo-container">
+    <ul class="todo-list">
+      <li class="todo" v-for="(todo, key) in todos" :key="key">
+        {{ todo }}
+      </li>
+    </ul>
+  </div>
+</template>
 
 <script>
 export default {
-  // methods: {
-  //   addNewTodo: function() {
-  //     this.todos.push({
-  //       id: this.nextTodoId++,
-  //       title: this.newTodoText,
-  //     });
-  //     this.newTodoText = "";
-  //   },
-  // },
+  props: ["todos"],
 };
 </script>
 
