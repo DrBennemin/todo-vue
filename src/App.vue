@@ -1,16 +1,40 @@
 <template>
   <div id="app">
-    <Test />
+    <body>
+      <Header />
+      <Input />
+    </body>
   </div>
 </template>
 
 <script>
-import Test from "";
+import Header from "./components/Header";
+import Input from "./components/Input";
 
 export default {
   name: "App",
   components: {
-    Test,
+    Header,
+    Input,
+  },
+  data: function() {
+    return {
+      newTodoText: [],
+      todos: [
+        {
+          id: 1,
+          title: "Do the dishes",
+        },
+        {
+          id: 2,
+          title: "Take out the trash",
+        },
+        {
+          id: 3,
+          title: "Mow the lawn",
+        },
+      ],
+    };
   },
 };
 </script>
