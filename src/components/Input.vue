@@ -2,7 +2,7 @@
   <div>
     <form>
       <input type="text" class="todo-input" />
-      <button class="todo-button" @click="addNewTodo(todo)">
+      <button class="todo-button" @submit="addNewTodo(todo)">
         <i class="fas fa-plus-square"></i>
       </button>
       <div class="select">
@@ -18,9 +18,10 @@
 
 <script>
 export default {
+  props: ["todo", "todos", "newTodo"],
   methods: {
-    addNewTodo: function() {
-      //   this.todos.push(todo);
+    addNewTodo() {
+      this.todos.push(this.newTodo);
     },
   },
 };

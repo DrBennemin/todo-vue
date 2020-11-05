@@ -1,9 +1,17 @@
 <template>
   <div class="todo-container">
     <ul class="todo-list">
-      <li class="todo" v-for="(todo, key) in todos" :key="key">
-        {{ todo }}
-      </li>
+      <div class="todo" v-for="(todo, key) in todos" :key="key">
+        <li class="todo-item">
+          {{ todo }}
+        </li>
+        <button class="completed-btn">
+          <i class="fas fa-check"></i>
+        </button>
+        <button class="delete-btn">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
     </ul>
   </div>
 </template>

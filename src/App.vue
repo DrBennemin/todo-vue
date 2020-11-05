@@ -22,8 +22,8 @@ export default {
   },
   data: function() {
     return {
-      newTodo: [],
-      todos: ["Do the dishes", "Take out the trash", "Mow the lawn"],
+      newTodo: [""],
+      todos: ["Penis waschen", "Toilette reinkotzen", "Mega Brueste"],
     };
   },
 };
