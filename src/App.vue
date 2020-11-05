@@ -3,7 +3,7 @@
     <body>
       <Header />
       <Input />
-      <ListItem :todos="todos" />
+      <ListItem :todos="todos" v-model="todos" />
     </body>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
   },
   data: function() {
     return {
-      newTodo: [""],
+      todotext: [],
       todos: ["Penis waschen", "Toilette reinkotzen", "Mega Brueste"],
     };
   },
@@ -110,6 +110,7 @@ form button:hover {
   padding: 1rem;
   cursor: pointer;
   font-size: 1rem;
+  outline: none;
 }
 
 .completed-btn {
