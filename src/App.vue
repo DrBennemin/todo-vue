@@ -2,8 +2,8 @@
   <div id="app">
     <body>
       <Header />
-      <Input />
-      <ListItem :todos="todos" v-model="todotext" />
+      <Input :todos="todos" />
+      <ListItem :todos="todos" />
     </body>
   </div>
 </template>
@@ -22,8 +22,7 @@ export default {
   },
   data: function() {
     return {
-      todotext: ["Peter"],
-      todos: ["Penis waschen", "Toilette reinkotzen", "Mega Brueste"],
+      todos: [],
     };
   },
 };

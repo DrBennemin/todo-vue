@@ -23,11 +23,16 @@
 
 <script>
 export default {
-  props: ["todo", "todos", "newTodo", "todotext"],
+  props: ["todo", "todos"],
+  data: function() {
+    return {
+      todotext: "",
+    };
+  },
   methods: {
     onSubmit() {
       localStorage.setItem("todo", JSON.stringify(this.todotext));
-      this.todotext.push(this.todotext);
+      this.todos.push(this.todotext);
       this.todotext = "";
     },
   },
