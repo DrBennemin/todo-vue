@@ -3,7 +3,7 @@
     <body>
       <Header />
       <Input />
-      <ListItem :todos="todos" v-model="todos" />
+      <ListItem :todos="todos" v-model="todotext" />
     </body>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
   },
   data: function() {
     return {
-      todotext: [],
+      todotext: ["Peter"],
       todos: ["Penis waschen", "Toilette reinkotzen", "Mega Brueste"],
     };
   },

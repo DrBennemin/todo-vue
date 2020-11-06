@@ -26,8 +26,9 @@ export default {
   props: ["todo", "todos", "newTodo", "todotext"],
   methods: {
     onSubmit() {
-      this.todos.push(this.todotext);
-      // this.todotext = null;
+      // this.todotext.push(this.todos);
+      localStorage.setItem("todo", JSON.stringify(this.todotext));
+      // this.todotext = "";
     },
   },
 };
