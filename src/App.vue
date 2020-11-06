@@ -25,6 +25,23 @@ export default {
       todos: [],
     };
   },
+  mounted: function() {
+    this.getTodos();
+  },
+  methods: {
+    getTodos() {
+      if (localStorage.getItem("todos") === null) {
+        localStorage.setItem("todos", JSON.stringify([]));
+      } else {
+        localStorage.getItem("todos");
+        let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
+        console.log(todosLocalStorage);
+        todosLocalStorage.forEach(function(todo) {
+          this.todos.push(todo);
+        });
+      }
+    },
+  },
 };
 </script>
 

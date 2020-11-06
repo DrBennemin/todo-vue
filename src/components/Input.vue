@@ -31,8 +31,11 @@ export default {
   },
   methods: {
     onSubmit() {
-      localStorage.setItem("todo", JSON.stringify(this.todotext));
-      this.todos.push(this.todotext);
+      if (localStorage.getItem("todos") !== null) {
+        let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
+        todosLocalStorage.push(this.todotext);
+        localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
+      }
       this.todotext = "";
     },
   },
