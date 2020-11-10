@@ -35,7 +35,10 @@ export default {
         let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
         todosLocalStorage.push([this.todotext, "uncompleted"]);
         localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
+      } else {
+        localStorage.setItem("todos", JSON.stringify([[this.todotext, 'uncompleted']]));
       }
+      this.$emit('addTodoFromInput', [this.todotext, "uncompleted"]);
       this.todotext = "";
     },
   },

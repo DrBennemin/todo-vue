@@ -2,7 +2,7 @@
   <div id="app">
     <body>
       <Header />
-      <Input :todos="todos" />
+      <Input v-on:addTodoFromInput="onAddTodo" :todos="todos" />
       <ListItem :todos="todos" />
     </body>
   </div>
@@ -20,20 +20,20 @@ export default {
     Input,
     ListItem,
   },
-  computed: {
-    todos: function() {
-      let todosLocalStorage = JSON.parse.localStorage.getItem("todos")
-        ? localStorage.getItem("todos")
-        : [];
-      return todosLocalStorage;
-    },
-  },
-  mounted() {
-    if (typeof localStorage.getItem("todos") == "undefined") {
-      localStorage.setItem("todos", "[]");
+  data: function() {
+    return {
+      todos:  JSON.parse(localStorage.getItem("todos")),
     }
   },
-  methods: {},
+  methods: {
+    onAddTodo: function(todo) {
+      if(this.todos == null) {
+        this.todos = [todo];
+      } else {
+        this.todos.push(todo);
+      }
+    },
+  },
 };
 </script>
 
