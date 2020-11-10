@@ -3,7 +3,7 @@
     <body>
       <Header />
       <Input v-on:addTodoFromInput="onAddTodo" :todos="todos" />
-      <ListItem :todos="todos" />
+      <ListItem v-on:removeItemFromList="onRemoveItem" :todos="todos" />
     </body>
   </div>
 </template>
@@ -22,16 +22,22 @@ export default {
   },
   data: function() {
     return {
-      todos:  JSON.parse(localStorage.getItem("todos")),
-    }
+      todos: JSON.parse(localStorage.getItem("todos")),
+    };
   },
   methods: {
     onAddTodo: function(todo) {
-      if(this.todos == null) {
+      if (this.todos == null) {
         this.todos = [todo];
       } else {
         this.todos.push(todo);
       }
+    },
+    onRemoveItem: function(key) {
+      let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
+      todosLocalStorage.splice(key, 1);
+      localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
+      this.todos.splice(key, 1);
     },
   },
 };
