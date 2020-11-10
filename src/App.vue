@@ -50,7 +50,7 @@ export default {
   box-sizing: border-box;
 }
 body {
-  background-image: linear-gradient(120deg, #023e8a, #48cae4);
+  background-image: linear-gradient(120deg, #023e8a, #ffc2cc);
   color: white;
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
