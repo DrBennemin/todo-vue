@@ -8,7 +8,7 @@
         <button class="completed-btn">
           <i class="fas fa-check"></i>
         </button>
-        <button class="delete-btn">
+        <button @click="removeItem(key)" class="delete-btn">
           <i class="fas fa-trash"></i>
         </button>
       </div>
@@ -20,8 +20,13 @@
 export default {
   props: ["todos"],
   mounted() {
-    console.log(this.todos);
-  }
+    // console.log(this.todos);
+  },
+  methods: {
+    removeItem(key) {
+      this.$emit("removeItemFromList", key);
+    },
+  },
 };
 </script>
 
