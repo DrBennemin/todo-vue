@@ -33,7 +33,7 @@ export default {
     onSubmit() {
       if (localStorage.getItem("todos") !== null) {
         let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
-        todosLocalStorage.push(this.todotext);
+        todosLocalStorage.push([this.todotext, "uncompleted"]);
         localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
       }
       this.todotext = "";
