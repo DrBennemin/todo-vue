@@ -3,7 +3,11 @@
     <body>
       <Header />
       <Input v-on:addTodoFromInput="onAddTodo" :todos="todos" />
-      <ListItem v-on:removeItemFromList="onRemoveItem" :todos="todos" />
+      <ListItem
+        v-on:setCompleteTask="setCompleteTaks"
+        v-on:removeItemFromList="onRemoveItem"
+        :todos="todos"
+      />
     </body>
   </div>
 </template>
@@ -38,6 +42,12 @@ export default {
       todosLocalStorage.splice(key, 1);
       localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
       this.todos.splice(key, 1);
+    },
+    setCompleteTaks: function(key) {
+      let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
+      todosLocalStorage.splice(key, 1, "completed");
+      localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
+      this.todos.splice(key, 1, "completed");
     },
   },
 };

@@ -5,7 +5,7 @@
         <li class="todo-item">
           {{ todo[0] }}
         </li>
-        <button class="completed-btn">
+        <button @click="completeTask(key)" class="completed-btn">
           <i class="fas fa-check"></i>
         </button>
         <button @click="removeItem(key)" class="delete-btn">
@@ -25,6 +25,9 @@ export default {
   methods: {
     removeItem(key) {
       this.$emit("removeItemFromList", key);
+    },
+    completeTask(key) {
+      this.$emit("setCompleteTask", key);
     },
   },
 };
