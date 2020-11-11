@@ -12,6 +12,7 @@
       </button>
       <div class="select">
         <select name="todos" class="filter-todo">
+          <!-- @change="filterTask" -->
           <option value="all">All</option>
           <option value="completed">Completed</option>
           <option value="uncompleted">Uncompleted</option>
@@ -36,11 +37,19 @@ export default {
         todosLocalStorage.push([this.todotext, "uncompleted"]);
         localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
       } else {
-        localStorage.setItem("todos", JSON.stringify([[this.todotext, 'uncompleted']]));
+        localStorage.setItem(
+          "todos",
+          JSON.stringify([[this.todotext, "uncompleted"]])
+        );
       }
-      this.$emit('addTodoFromInput', [this.todotext, "uncompleted"]);
+      this.$emit("addTodoFromInput", [this.todotext, "uncompleted"]);
       this.todotext = "";
     },
   },
+  // computed: {
+  //   filterTask() {
+  //     return this.filterTask.filter((task) => !task.contains("uncompleted"));
+  //   },
+  // },
 };
 </script>
