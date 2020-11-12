@@ -11,6 +11,7 @@
         v-on:setCompleteTask="setCompleteTaks"
         v-on:removeItemFromList="onRemoveItem"
         :todos="todos"
+        :filter="activeFilter"
       />
     </body>
   </div>
@@ -31,6 +32,7 @@ export default {
   data: function() {
     return {
       todos: JSON.parse(localStorage.getItem("todos")),
+      activeFilter: "all",
     };
   },
   computed: {
@@ -62,26 +64,8 @@ export default {
     },
 
     filterTodos: function(filter) {
-      let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
-      todosLocalStorage.forEach(function(todo) {});
+      this.activeFilter = filter;
     },
-
-    // const todos = JSON.parse(localStorage.getItem("todos"));
-    //       todos.forEach(function(todo) {
-    //         const selected = todo.todos.contains("completed");
-    //         const displayItem = todo.style.display;
-    //         switch (option.target.value) {
-    //           case "all":
-    //             displayItem("flex", todo);
-    //             break;
-    //           case "completed":
-    //             displayItem(selected ? "flex" : "none", todo);
-    //             break;
-    //           case "uncompleted":
-    //             displayItem(!selected ? "flex" : "none", todo);
-    //         }
-    //       });
-    // },
   },
 };
 </script>
