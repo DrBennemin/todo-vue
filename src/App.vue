@@ -2,7 +2,11 @@
   <div id="app">
     <body>
       <Header />
-      <Input v-on:addTodoFromInput="onAddTodo" :todos="todos" />
+      <Input
+        v-on:addTodoFromInput="onAddTodo"
+        :todos="todos"
+        v-on:onChangeFilter="filterTodos"
+      />
       <ListItem
         v-on:setCompleteTask="setCompleteTaks"
         v-on:removeItemFromList="onRemoveItem"
@@ -29,6 +33,13 @@ export default {
       todos: JSON.parse(localStorage.getItem("todos")),
     };
   },
+  computed: {
+    completed: function() {
+      let todos = JSON.parse(localStorage.getItem("todos"));
+      todos.filter("completed");
+      return todos;
+    },
+  },
   methods: {
     onAddTodo: function(todo) {
       if (this.todos == null) {
@@ -43,11 +54,34 @@ export default {
       localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
       this.todos.splice(key, 1);
     },
+
     setCompleteTaks: function(key) {
       let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
       todosLocalStorage[key].splice(1, 1, "completed");
       localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
     },
+
+    filterTodos: function(filter) {
+      let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
+      todosLocalStorage.forEach(function(todo) {});
+    },
+
+    // const todos = JSON.parse(localStorage.getItem("todos"));
+    //       todos.forEach(function(todo) {
+    //         const selected = todo.todos.contains("completed");
+    //         const displayItem = todo.style.display;
+    //         switch (option.target.value) {
+    //           case "all":
+    //             displayItem("flex", todo);
+    //             break;
+    //           case "completed":
+    //             displayItem(selected ? "flex" : "none", todo);
+    //             break;
+    //           case "uncompleted":
+    //             displayItem(!selected ? "flex" : "none", todo);
+    //         }
+    //       });
+    // },
   },
 };
 </script>
