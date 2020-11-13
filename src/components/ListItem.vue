@@ -3,7 +3,7 @@
     <ul class="todo-list">
       <div class="todo" v-for="(todo, key) in tasks" :key="key">
         <li :class="{ completed: isCompleted }" class="todo-item">
-          {{ todo.task }}
+          {{ todo.task || todo[0].task }}
         </li>
         <button
           @click="completeTask(key), setClassCompleted()"
