@@ -2,11 +2,13 @@
   <div class="todo-container">
     <ul class="todo-list">
       <div class="todo" v-for="(todo, key) in tasks" :key="key">
-        <li :class="{ completed: isCompleted }" class="todo-item">
+        <!-- <li :class="{ completed: isCompleted }" class="todo-item"> -->
+        <li :class="[isCompleted ? completed : ``]" class="todo-item">
+          {{ todo.completed }}
           {{ todo.task || todo[0].task }}
         </li>
         <button
-          @click="completeTask(key), setClassCompleted()"
+          @click="completeTask(key), toggleClassCompleted()"
           class="completed-btn"
         >
           <i class="fas fa-check"></i>
@@ -24,11 +26,9 @@ export default {
   props: ["todos", "filter"],
   data: function() {
     return {
+      completed: `completed`,
       isCompleted: false,
     };
-  },
-  mounted() {
-    // console.log(this.todos);
   },
 
   methods: {
@@ -38,7 +38,7 @@ export default {
     completeTask(key) {
       this.$emit("toggleCompleteTask", key);
     },
-    setClassCompleted() {
+    toggleClassCompleted() {
       this.isCompleted = !this.isCompleted;
       // this.checkCompleted(todo);
     },
