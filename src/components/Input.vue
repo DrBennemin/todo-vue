@@ -39,15 +39,17 @@ export default {
     onSubmit() {
       if (localStorage.getItem("todos") !== null) {
         let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
-        todosLocalStorage.push([this.todotext, "uncompleted"]);
+        todosLocalStorage.push({ task: this.todotext, completed: false });
         localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
       } else {
         localStorage.setItem(
           "todos",
-          JSON.stringify([[this.todotext, "uncompleted"]])
+          JSON.stringify([{ task: this.todotext, completed: false }])
         );
       }
-      this.$emit("addTodoFromInput", [this.todotext, "uncompleted"]);
+      this.$emit("addTodoFromInput", [
+        { task: this.todotext, completed: false },
+      ]);
       this.todotext = "";
     },
 

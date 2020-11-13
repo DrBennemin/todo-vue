@@ -2,11 +2,11 @@
   <div class="todo-container">
     <ul class="todo-list">
       <div class="todo" v-for="(todo, key) in tasks" :key="key">
-        <li :class="{ completed: checkCompleted(todo) }" class="todo-item">
-          {{ todo[0] }}
+        <li :class="{ completed: isCompleted }" class="todo-item">
+          {{ todo.task }}
         </li>
         <button
-          @click="completeTask(key), setClassCompleted(todo)"
+          @click="completeTask(key), setClassCompleted()"
           class="completed-btn"
         >
           <i class="fas fa-check"></i>
@@ -38,8 +38,9 @@ export default {
     completeTask(key) {
       this.$emit("setCompleteTask", key);
     },
-    setClassCompleted(todo) {
-      this.checkCompleted(todo);
+    setClassCompleted() {
+      this.isCompleted = !this.isCompleted;
+      // this.checkCompleted(todo);
     },
     checkCompleted(todo) {
       if (todo[1] == "completed") {

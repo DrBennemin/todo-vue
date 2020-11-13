@@ -59,7 +59,8 @@ export default {
 
     setCompleteTaks: function(key) {
       let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
-      todosLocalStorage[key].splice(1, 1, "completed");
+      // todosLocalStorage[key].splice(1, 1, true);
+      todosLocalStorage[key].completed = true;
       localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
     },
 
