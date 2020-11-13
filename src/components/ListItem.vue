@@ -1,7 +1,7 @@
 <template>
   <div class="todo-container">
     <ul class="todo-list">
-      <div class="todo" v-for="(todo, key) in tasks" :key="key">
+      <div class="todo" v-for="(todo, key) in filterTodos" :key="key">
         <!-- <li :class="{ completed: isCompleted }" class="todo-item"> -->
         <li :class="[isCompleted ? completed : ``]" class="todo-item">
           {{ todo.completed }}
@@ -42,30 +42,39 @@ export default {
       this.isCompleted = !this.isCompleted;
       // this.checkCompleted(todo);
     },
-    checkCompleted(todo) {
-      if (todo[1] == "completed") {
-        return true;
-      } else {
-        return false;
-      }
-    },
   },
   computed: {
-    completedTasks() {
-      return this.todos.filter((todo) => todo.completed == true);
-    },
-    uncompletedTasks() {
-      return this.todos.filter((todo) => todo.completed == false);
-    },
-    tasks() {
-      if (this.filter == "completed") {
-        return this.completedTasks;
-      } else if (this.filter == "uncompleted") {
-        return this.uncompletedTasks;
-      } else {
-        return this.todos;
+    filterTodos() {
+      var filteredTodos;
+      switch (this.filter) {
+        case "completed":
+          filteredTodos = this.todos.filter((todo) => todo.completed == true);
+          break;
+        case "uncompleted":
+          filteredTodos = this.todos.filter((todo) => todo.completed == false);
+          break;
+        default:
+          filteredTodos = this.todos;
+          break;
       }
+      return filteredTodos;
     },
+
+    // completedTasks() {
+    //   return this.todos.filter((todo) => todo.completed == true);
+    // },
+    // uncompletedTasks() {
+    //   return this.todos.filter((todo) => todo.completed == false);
+    // },
+    // tasks() {
+    //   if (this.filter == "completed") {
+    //     return this.todos.filter((todo) => todo.completed == true);
+    //   } else if (this.filter == "uncompleted") {
+    //     return this.todos.filter((todo) => todo.completed == false);
+    //   } else {
+    //     return this.todos;
+    //   }
+    // },
   },
 };
 </script>
