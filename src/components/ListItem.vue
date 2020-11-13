@@ -1,11 +1,16 @@
 <template>
   <div class="todo-container">
     <ul class="todo-list">
-      <div class="todo" v-for="(todo, key) in todos" :key="key">
-        <li class="todo-item">
-          {{ todo[0] }}
+      <div class="todo" v-for="(todo, key) in tasks" :key="key">
+        <!-- <li :class="{ completed: isCompleted }" class="todo-item"> -->
+        <li :class="[isCompleted ? completed : ``]" class="todo-item">
+          {{ todo.completed }}
+          {{ todo.task || todo[0].task }}
         </li>
-        <button class="completed-btn">
+        <button
+          @click="completeTask(key), toggleClassCompleted()"
+          class="completed-btn"
+        >
           <i class="fas fa-check"></i>
         </button>
         <button @click="removeItem(key)" class="delete-btn">
@@ -18,13 +23,48 @@
 
 <script>
 export default {
-  props: ["todos"],
-  mounted() {
-    // console.log(this.todos);
+  props: ["todos", "filter"],
+  data: function() {
+    return {
+      completed: `completed`,
+      isCompleted: false,
+    };
   },
+
   methods: {
     removeItem(key) {
       this.$emit("removeItemFromList", key);
+    },
+    completeTask(key) {
+      this.$emit("toggleCompleteTask", key);
+    },
+    toggleClassCompleted() {
+      this.isCompleted = !this.isCompleted;
+      // this.checkCompleted(todo);
+    },
+    checkCompleted(todo) {
+      if (todo[1] == "completed") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+  computed: {
+    completedTasks() {
+      return this.todos.filter((todo) => todo.completed == true);
+    },
+    uncompletedTasks() {
+      return this.todos.filter((todo) => todo.completed == false);
+    },
+    tasks() {
+      if (this.filter == "completed") {
+        return this.completedTasks;
+      } else if (this.filter == "uncompleted") {
+        return this.uncompletedTasks;
+      } else {
+        return this.todos;
+      }
     },
   },
 };

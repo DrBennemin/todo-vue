@@ -2,8 +2,17 @@
   <div id="app">
     <body>
       <Header />
-      <Input v-on:addTodoFromInput="onAddTodo" :todos="todos" />
-      <ListItem v-on:removeItemFromList="onRemoveItem" :todos="todos" />
+      <Input
+        v-on:addTodoFromInput="onAddTodo"
+        :todos="todos"
+        v-on:onChangeFilter="filterTodos"
+      />
+      <ListItem
+        v-on:toggleCompleteTask="toggleCompleteTask"
+        v-on:removeItemFromList="onRemoveItem"
+        :todos="todos"
+        :filter="activeFilter"
+      />
     </body>
   </div>
 </template>
@@ -23,7 +32,15 @@ export default {
   data: function() {
     return {
       todos: JSON.parse(localStorage.getItem("todos")),
+      activeFilter: "all",
     };
+  },
+  computed: {
+    completed: function() {
+      let todos = JSON.parse(localStorage.getItem("todos"));
+      todos.filter("completed");
+      return todos;
+    },
   },
   methods: {
     onAddTodo: function(todo) {
@@ -38,6 +55,18 @@ export default {
       todosLocalStorage.splice(key, 1);
       localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
       this.todos.splice(key, 1);
+    },
+
+    toggleCompleteTask: function(key) {
+      let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
+      // todosLocalStorage[key].splice(1, 1, true);
+      // todosLocalStorage[key].completed = true;
+      todosLocalStorage[key].completed = !todosLocalStorage[key].completed;
+      localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
+    },
+
+    filterTodos: function(filter) {
+      this.activeFilter = filter;
     },
   },
 };
