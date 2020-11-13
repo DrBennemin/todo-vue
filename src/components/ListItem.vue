@@ -19,9 +19,7 @@
 <script>
 export default {
   props: ["todos"],
-  mounted() {
-    // console.log(this.todos);
-  },
+  mounted() {},
   methods: {
     removeItem(key) {
       this.$emit("removeItemFromList", key);
