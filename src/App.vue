@@ -8,7 +8,7 @@
         v-on:onChangeFilter="filterTodos"
       />
       <ListItem
-        v-on:setCompleteTask="setCompleteTaks"
+        v-on:toggleCompleteTask="toggleCompleteTask"
         v-on:removeItemFromList="onRemoveItem"
         :todos="todos"
         :filter="activeFilter"
@@ -57,10 +57,11 @@ export default {
       this.todos.splice(key, 1);
     },
 
-    setCompleteTaks: function(key) {
+    toggleCompleteTask: function(key) {
       let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
       // todosLocalStorage[key].splice(1, 1, true);
-      todosLocalStorage[key].completed = true;
+      // todosLocalStorage[key].completed = true;
+      todosLocalStorage[key].completed = !todosLocalStorage[key].completed;
       localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
     },
 

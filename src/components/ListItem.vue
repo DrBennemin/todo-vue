@@ -36,7 +36,7 @@ export default {
       this.$emit("removeItemFromList", key);
     },
     completeTask(key) {
-      this.$emit("setCompleteTask", key);
+      this.$emit("toggleCompleteTask", key);
     },
     setClassCompleted() {
       this.isCompleted = !this.isCompleted;
@@ -52,10 +52,10 @@ export default {
   },
   computed: {
     completedTasks() {
-      return this.todos.filter((todo) => todo[1] == "completed");
+      return this.todos.filter((todo) => todo.completed == true);
     },
     uncompletedTasks() {
-      return this.todos.filter((todo) => todo[1] == "uncompleted");
+      return this.todos.filter((todo) => todo.completed == false);
     },
     tasks() {
       if (this.filter == "completed") {
