@@ -47,9 +47,7 @@ export default {
           JSON.stringify([{ task: this.todotext, completed: false }])
         );
       }
-      this.$emit("addTodoFromInput", [
-        { task: this.todotext, completed: false },
-      ]);
+      this.$emit("addTodoFromInput", { task: this.todotext, completed: false });
       this.todotext = "";
     },
 

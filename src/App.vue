@@ -45,8 +45,9 @@ export default {
   methods: {
     onAddTodo: function(todo) {
       if (this.todos == null) {
-        this.todos = [todo];
+        this.todos = todo;
       } else {
+        console.log(todo);
         this.todos.push(todo);
       }
     },
@@ -59,8 +60,7 @@ export default {
 
     toggleCompleteTask: function(key) {
       let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
-      // todosLocalStorage[key].splice(1, 1, true);
-      // todosLocalStorage[key].completed = true;
+
       todosLocalStorage[key].completed = !todosLocalStorage[key].completed;
       localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
     },
