@@ -14,18 +14,18 @@
       </div>
     </ul>
   </div>
+
+  <script>
+    export default {
+      props: ["todos"],
+      mounted() {},
+      methods: {
+        removeItem(key) {
+          this.$emit("removeItemFromList", key);
+        },
+      },
+    };
+  </script>
+
+  <style></style>
 </template>
-
-<script>
-export default {
-  props: ["todos"],
-  mounted() {},
-  methods: {
-    removeItem(key) {
-      this.$emit("removeItemFromList", key);
-    },
-  },
-};
-</script>
-
-<style></style>
