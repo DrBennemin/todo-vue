@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  props: ["todo", "todos"],
+  props: ["todos"],
   data: function() {
     return {
       todotext: "",

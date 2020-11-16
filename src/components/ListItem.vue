@@ -1,82 +1,38 @@
 <template>
-  <div class="todo-container">
-    <ul class="todo-list">
-      <div class="todo" v-for="(todo, key) in filterTodos" :key="key">
-        <!-- <li :class="{ completed: isCompleted }" class="todo-item"> -->
-        <li :class="[isCompleted ? completed : ``]" class="todo-item">
-          {{ todo.completed }}
-          {{ todo.task || todo[0].task }}
-        </li>
-        <button
-          @click="completeTask(key), toggleClassCompleted()"
-          class="completed-btn"
-        >
-          <i class="fas fa-check"></i>
-        </button>
-        <button @click="removeItem(key)" class="delete-btn">
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-    </ul>
+  <div class="todo" :class="{'completed': task.completed}">
+    <div>{{ task.task }}></div> 
+    <button @click="toggleTaskState(id)" class="completed-btn">
+      <i class="fas fa-check"></i>
+    </button>
+    <button @click="deleteTaskItem(id)" class="delete-btn">
+      <i class="fas fa-trash"></i>
+    </button>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["todos", "filter"],
   data: function() {
     return {
-      completed: `completed`,
-      isCompleted: false,
     };
   },
-
+  props: ["task", "id"],
   methods: {
-    removeItem(key) {
-      this.$emit("removeItemFromList", key);
+    toggleTaskState: function(id) {
+      let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
+      todosLocalStorage[id].completed = !todosLocalStorage[id].completed;
+      localStorage.setItem("todos", JSON.stringify(todosLocalStorage));  
+      this.reloadTasks()
     },
-    completeTask(key) {
-      this.$emit("toggleCompleteTask", key);
+    deleteTaskItem(id) {
+      let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
+      todosLocalStorage.splice(id, 1);
+      localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
+      this.reloadTasks()
     },
-    toggleClassCompleted() {
-      this.isCompleted = !this.isCompleted;
-      // this.checkCompleted(todo);
-    },
-  },
-  computed: {
-    filterTodos() {
-      var filteredTodos;
-      switch (this.filter) {
-        case "completed":
-          filteredTodos = this.todos.filter((todo) => todo.completed == true);
-          break;
-        case "uncompleted":
-          filteredTodos = this.todos.filter((todo) => todo.completed == false);
-          break;
-        default:
-          filteredTodos = this.todos;
-          break;
-      }
-      return filteredTodos;
-    },
-
-    // completedTasks() {
-    //   return this.todos.filter((todo) => todo.completed == true);
-    // },
-    // uncompletedTasks() {
-    //   return this.todos.filter((todo) => todo.completed == false);
-    // },
-    // tasks() {
-    //   if (this.filter == "completed") {
-    //     return this.todos.filter((todo) => todo.completed == true);
-    //   } else if (this.filter == "uncompleted") {
-    //     return this.todos.filter((todo) => todo.completed == false);
-    //   } else {
-    //     return this.todos;
-    //   }
-    // },
+    reloadTasks() {
+      this.$emit('reload')
+    }
   },
 };
 </script>
-
-<style></style>

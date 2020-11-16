@@ -7,12 +7,7 @@
         :todos="todos"
         v-on:onChangeFilter="filterTodos"
       />
-      <ListItem
-        v-on:toggleCompleteTask="toggleCompleteTask"
-        v-on:removeItemFromList="onRemoveItem"
-        :todos="todos"
-        :filter="activeFilter"
-      />
+      <List :filter="activeFilter" />
     </body>
   </div>
 </template>
@@ -20,18 +15,17 @@
 <script>
 import Header from "./components/Header";
 import Input from "./components/Input";
-import ListItem from "./components/ListItem";
+import List from "./components/List";
 
 export default {
   name: "App",
   components: {
     Header,
     Input,
-    ListItem,
+    List,
   },
   data: function() {
     return {
-      todos: JSON.parse(localStorage.getItem("todos")),
       activeFilter: "all",
     };
   },
@@ -51,20 +45,6 @@ export default {
         this.todos.push(todo);
       }
     },
-    onRemoveItem: function(key) {
-      let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
-      todosLocalStorage.splice(key, 1);
-      localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
-      this.todos.splice(key, 1);
-    },
-
-    toggleCompleteTask: function(key) {
-      let todosLocalStorage = JSON.parse(localStorage.getItem("todos"));
-
-      todosLocalStorage[key].completed = !todosLocalStorage[key].completed;
-      localStorage.setItem("todos", JSON.stringify(todosLocalStorage));
-    },
-
     filterTodos: function(filter) {
       this.activeFilter = filter;
     },
